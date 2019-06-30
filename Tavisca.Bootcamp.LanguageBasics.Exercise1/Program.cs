@@ -23,7 +23,6 @@ namespace Tavisca.Bootcamp.LanguageBasics.Exercise1
         public static int FindDigit(string equation)
         {
             // Add your code here.
-            // throw new NotImplementedException();
             int equalsIndex = equation.IndexOf('=');
             int asteriskIndex = equation.IndexOf('*');
             int questionMarkIndex = equation.IndexOf('?');
@@ -49,7 +48,7 @@ namespace Tavisca.Bootcamp.LanguageBasics.Exercise1
 
         private static int GetRequiredNumber(string argument1, string argument2, string argument3, bool product = false)
         {
-            int result = -1, temp = argument3.Length, remainder = 0;
+            int result, temp = argument3.Length, remainder = 0;
 
             // compute appropriate "result" as per the "product" argument
             if (product)
@@ -59,12 +58,17 @@ namespace Tavisca.Bootcamp.LanguageBasics.Exercise1
             else
             {
                 result = Int32.Parse(argument2) / Int32.Parse(argument1);
+                // check divisibility
+                if (result * Int32.Parse(argument1) != Int32.Parse(argument2))
+                {
+                    return -1;
+                }
             }
 
             // check for leading zeros
             if ((result / (int)Math.Pow(10.0, (double)(temp - 1))) < 1)
             {
-                return result;
+                return -1;
             }
 
             // compute the required number literal
